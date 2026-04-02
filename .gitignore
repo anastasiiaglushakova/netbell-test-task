@@ -1,0 +1,14 @@
+# Environment files with secrets
+.env
+.env.local
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# n8n temp
+.n8n/*
+!.n8n/.gitkeep

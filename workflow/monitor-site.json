@@ -1,0 +1,126 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "36f4aa94-9c35-42af-8fac-4919b43d5b21",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://httpbin.org/get",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "965037b9-c1d6-423e-bd03-37c657f846a4",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "chatId": "!!! Change",
+        "text": "=OK! Time: {{ $now.format('HH:mm:ss') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "f0b0f6a5-5dd7-473b-a275-a9ec7193c2f7",
+      "name": "Send a text message",
+      "webhookId": "f22ce97a-65e4-4592-8278-86f83787f49f",
+      "credentials": {
+        "telegramApi": {
+          "id": "z4Sf5jvileBVsciy",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://httpbin.org/post",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"status\": \"alive\",\n  \"url\": \"https://httpbin.org/status/200\",\n  \"timestamp\": \"{{ $now.format('HH:mm:ss') }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "04f42189-32f7-421f-8c96-89a649b3b552",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "21c5ad3f-fbb3-4a38-96e1-bb2878db3869",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "80cbe99f5f13b79d8ed03036059d970bf1c519b6247ffe69f4a9b3480c20ed29"
+  },
+  "id": "zIGubG47luaxC4VN",
+  "tags": []
+}
