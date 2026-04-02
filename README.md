@@ -49,7 +49,7 @@ http://localhost
 1.  HTTP/HTTPS прокси в `docker-compose.yml`
 2.  Валидный Access Token от @BotFather
 3.  Валидный Chat ID от @userinfobot
-```
+
 
 Логика отправки проверена на `https://httpbin.org/post`.
 
